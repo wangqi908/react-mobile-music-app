@@ -1,0 +1,31 @@
+.personalized-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .item-box {
+    width: 30%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .item-cover {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .item-title {
+    font-size: 12/16rem;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}

@@ -1,0 +1,120 @@
+.audio-component {
+  .audio-box {
+    width: 100%;
+    height: 148/16rem;
+    position: relative;
+  }
+
+  .btn-box {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10/16rem;
+    box-shadow: 2/16rem 10/16rem 20/16rem 0/16rem rgb(114, 113, 113);
+    .play,
+    .stop,
+    .pause {
+      width: 40/16rem;
+      height: 40/16rem;
+      margin: 10/16rem;
+      text-align: center;
+      line-height: 40/16rem;
+      border-radius: 10/16rem;
+      transition: all 0.5s;
+      &:hover {
+        background-color: rgb(177, 177, 177);
+        cursor: pointer;
+        span {
+          color: #fff;
+        }
+      }
+      span {
+        font-size: 20/16rem;
+        color: rgb(134, 134, 134);
+      }
+    }
+  }
+
+  .cover-box {
+    position: absolute;
+    z-index: 2;
+    bottom: 20/16rem;
+    left: 16/16rem;
+    border-radius: 50%;
+    width: 100/16rem;
+    height: 100/16rem;
+    overflow: hidden;
+    background-image: linear-gradient(rgb(56, 54, 54), rgb(10, 4, 4));
+    box-shadow: 2/16rem 10/16rem 20/16rem 0/16rem rgb(114, 113, 113);
+    img {
+      width: 100%;
+      height: 100%;
+      animation: myCircle 10s linear infinite;
+    }
+
+    .pause {
+      animation-play-state: paused;
+    }
+    .running {
+      animation-play-state: running;
+    }
+  }
+
+  .music-info {
+    width: 100%;
+    position: absolute;
+    bottom: 60/16rem;
+    padding: 10/16rem;
+    box-sizing: border-box;
+    background-color: rgba(233, 233, 233, 0.4);
+    border-top-right-radius: 10/16rem;
+    border-top-left-radius: 10/16rem;
+  }
+  .info-content {
+    width: 60%;
+    float: right;
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 8/16rem;
+      font-weight: 600;
+    }
+    .time {
+      span {
+        font-size: 12/16rem;
+        color: rgb(139, 139, 139);
+      }
+    }
+  }
+
+  .progress-box {
+    height: 10/16rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(163, 159, 159);
+    margin-bottom: 8/16rem;
+    .progress-on {
+      height: 100%;
+      background-color: rgb(211, 87, 87);
+      width: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @keyframes myCircle {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

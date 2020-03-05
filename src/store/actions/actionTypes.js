@@ -1,0 +1,5 @@
+export const ADD = 'Add'
+export const INCREMENT = 'INCREMENT'
+export const GET_BANNER = 'GET_BANNER'
+export const GET_PERSONALIZED = 'GET_PERSONALIZED'
+export const GET_PLAYLIST_DETAIL = 'GET_PLAYLIST_DETAIL'
