@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSongUrlAction } from '@/store/actions'
 import { Player } from '@/components'
+import Lyric from './Lyric'
 import './style.less'
 
 class Detail extends Component {
@@ -12,6 +13,7 @@ class Detail extends Component {
   render() {
     return (
       <div className="song-detail">
+        <Lyric />
         <div className="player-box">
           <Player />
         </div>
