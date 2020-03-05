@@ -1,14 +1,17 @@
 // 时间戳格式化
 export const formatTime = (date, type) => {
   if (!date || date === '') return ''
-  date = new Date(date * 1); //如果date为13位不需要乘1000
+  date = new Date(date * 1) //如果date为13位不需要乘1000
 
   const year = date.getFullYear()
-  const month = (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : date.getMonth() + 1)
-  const day = (date.getDate() < 10 ? ('0' + (date.getDate())) : date.getDate())
-  const hours = (date.getHours() < 10 ? ('0' + date.getHours()) : date.getHours())
-  const minutes = (date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes())
-  const seconds = (date.getSeconds() < 10 ? ('0' + date.getSeconds()) : date.getSeconds());
+  const month =
+    date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+  const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+  const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+  const minutes =
+    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+  const seconds =
+    date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
   if (type === 'all') {
     let res = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
     return res
@@ -19,15 +22,14 @@ export const formatTime = (date, type) => {
     let res = `${hours}:${minutes}:${seconds}`
     return res
   } else {
-    return { year, month, day, hours, minutes, seconds };
+    return { year, month, day, hours, minutes, seconds }
   }
 }
-
 
 // 节流(throttle)
 export const throttle = (fn, delay) => {
   let valid = true
-  return function () {
+  return function() {
     if (!valid) {
       //休息时间 暂不接客
       return false
@@ -36,7 +38,7 @@ export const throttle = (fn, delay) => {
     valid = false
     setTimeout(() => {
       fn()
-      valid = true;
+      valid = true
     }, delay)
   }
 }
@@ -57,14 +59,14 @@ export const deepCopy = source => {
 // 复制到粘贴板
 export const copyToClipboard = val => {
   return new Promise((resolve, reject) => {
-    let input = document.createElement("input");
-    input.value = val;
-    document.body.appendChild(input);
-    input.select(); // 选择对象;
-    let res = document.execCommand("Copy"); // 执行浏览器复制命令
+    let input = document.createElement('input')
+    input.value = val
+    document.body.appendChild(input)
+    input.select() // 选择对象;
+    let res = document.execCommand('Copy') // 执行浏览器复制命令
     if (res) resolve(res)
     else reject(res)
-    input.remove();
+    input.remove()
   })
 }
 
@@ -78,14 +80,17 @@ export const formatSecond = second => {
     let mimute = Math.floor(second / 60)
     second = second - mimute * 60
     return hours
-      ? hours +
-      ':' +
-      ('0' + mimute).slice(-2) +
-      ':' +
-      ('0' + second).slice(-2)
+      ? hours + ':' + ('0' + mimute).slice(-2) + ':' + ('0' + second).slice(-2)
       : ('0' + mimute).slice(-2) + ':' + ('0' + second).slice(-2)
   } else {
     return '0:00:00'
   }
 }
 
+export const sliceStr = (arr, key) => {
+  let str = ''
+  arr.forEach(item => {
+    str += item[key] + '/'
+  })
+  return str.slice(0, -1)
+}

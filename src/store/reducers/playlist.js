@@ -1,7 +1,7 @@
 import { GET_PLAYLIST_DETAIL } from '@/store/actions/actionTypes'
 
 const initState = {
-  playListInfo:{}
+  playListInfo: {}
 }
 
 export default (state = initState, action) => {

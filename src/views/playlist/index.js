@@ -18,10 +18,6 @@ class Playlist extends Component {
         <Head info={info} />
         <p className="list-tip">歌单列表：</p>
         <List info={info} />
-        {/* <div className="head">
-          <img src={info.backgroundCoverUrl} alt="head" />
-        </div>
-        <p>{info.description}</p> */}
       </div>
     )
   }
