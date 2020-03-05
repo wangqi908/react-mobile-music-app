@@ -1,10 +1,11 @@
 import {
-  ADD,
-  INCREMENT,
   GET_BANNER,
   GET_PERSONALIZED,
   GET_PLAYLIST_DETAIL,
-  GET_SONG_URL
+  GET_SONG_URL,
+  NEXT,
+  PREVIOUS,
+  GET_RANDOM
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
@@ -81,21 +82,26 @@ export const getSongUrlAction = payload => async dispatch => {
   }
 }
 
-// 增加
-export const addAction = payload => dispatch => {
-  setTimeout(() => {
-    let num = Math.floor(Math.random() * 10 + 1)
-    return dispatch({
-      type: ADD,
-      payload: num
-    })
-  }, 1000)
+// 下一曲
+export const nextAction = payload => {
+  return {
+    type: NEXT,
+    payload
+  }
 }
 
-// 减少
-export const incrementAction = payload => {
+// 上一曲
+export const previousAction = payload => {
   return {
-    type: INCREMENT,
+    type: PREVIOUS,
+    payload
+  }
+}
+
+// 随机
+export const playRandomAction = payload => {
+  return {
+    type: GET_RANDOM,
     payload
   }
 }

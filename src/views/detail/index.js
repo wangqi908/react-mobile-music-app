@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSongUrlAction } from '@/store/actions'
 import { Player } from '@/components'
+import './style.less'
 
 class Detail extends Component {
   componentDidMount() {
@@ -9,11 +10,11 @@ class Detail extends Component {
     this.props.getSongUrlAction({ id })
   }
   render() {
-    console.log(this.props.list)
     return (
-      <div>
-        clg
-        <Player list={[]} />
+      <div className="song-detail">
+        <div className="player-box">
+          <Player />
+        </div>
       </div>
     )
   }
