@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Index, NewSong, Search } from '@/views'
 import { Tab } from './components'
+import './style.less'
 
 export default class Layout extends Component {
   render() {
     return (
-      <div>
+      <div className="layout">
         <Tab />
         <div className="body">
           <Switch>

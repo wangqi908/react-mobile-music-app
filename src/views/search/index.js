@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { searchAction } from '@/store/actions'
 import { SearchBar, Toast } from 'antd-mobile'
 import { SongItem } from '@/components'
+import './style.less'
 
 class Search extends Component {
   state = {
@@ -26,12 +27,14 @@ class Search extends Component {
   render() {
     const { list } = this.props
     return (
-      <div>
-        <SearchBar
-          ref={ref => (this.autoFocusInst = ref)}
-          onChange={this.onChange}
-          onSubmit={this.submit}
-        />
+      <div className="search-box">
+        <div className="search-inp">
+          <SearchBar
+            ref={ref => (this.autoFocusInst = ref)}
+            onChange={this.onChange}
+            onSubmit={this.submit}
+          />
+        </div>
 
         <div className="new-song-list">
           {list.map((item, index) => {

@@ -5,7 +5,7 @@ import './style.less'
 export default class Tab extends Component {
   render() {
     return (
-      <div>
+      <div className="tab-box">
         <NavLink to="/" exact activeClassName="tab-on">
           首页
         </NavLink>
