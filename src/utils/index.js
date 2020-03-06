@@ -26,21 +26,12 @@ export const formatTime = (date, type) => {
   }
 }
 
-// 节流(throttle)
-export const throttle = (fn, delay) => {
-  let valid = true
-  return function() {
-    if (!valid) {
-      //休息时间 暂不接客
-      return false
-    }
-    // 工作时间，执行函数并且在间隔期内把状态位设为无效
-    valid = false
-    setTimeout(() => {
-      fn()
-      valid = true
-    }, delay)
-  }
+//数组对象根据id去重
+export const duplicateRemoval = arr => {
+  const res = new Map()
+  return arr.filter(a => {
+    return !res.has(a.id) && res.set(a.id, 1)
+  })
 }
 
 // 深拷贝

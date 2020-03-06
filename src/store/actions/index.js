@@ -5,14 +5,12 @@ import {
   GET_PERSONALIZED_NEW_SONG,
   GET_PLAYLIST_DETAIL,
   GET_SONG_URL,
-  NEXT,
-  PREVIOUS,
-  GET_RANDOM,
   GET_CURRENT_TIME,
   GET_DURATION,
   GET_SONG_PRESENT,
   GET_SONG_LYRIC,
-  CLEAN_PLAY_DATA
+  CLEAN_PLAY_DATA,
+  ADD_SONG
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
@@ -122,30 +120,6 @@ export const getSongUrlAction = params => async dispatch => {
   }
 }
 
-// 下一曲
-export const nextAction = payload => {
-  return {
-    type: NEXT,
-    payload
-  }
-}
-
-// 上一曲
-export const previousAction = payload => {
-  return {
-    type: PREVIOUS,
-    payload
-  }
-}
-
-// 随机
-export const playRandomAction = payload => {
-  return {
-    type: GET_RANDOM,
-    payload
-  }
-}
-
 // 音乐当前时间
 export const songCurrentTimeAction = payload => {
   return {
@@ -174,6 +148,14 @@ export const songPresentAction = payload => {
 export const cleanPlayDataAction = payload => {
   return {
     type: CLEAN_PLAY_DATA,
+    payload
+  }
+}
+
+// 添加音乐列表
+export const addSongAction = payload => {
+  return {
+    type: ADD_SONG,
     payload
   }
 }

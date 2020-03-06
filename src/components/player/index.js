@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { formatSecond } from '@/utils'
 import { connect } from 'react-redux'
 import {
-  nextAction,
-  previousAction,
-  playRandomAction,
   songPresentAction,
-  cleanPlayDataAction
+  getSongUrlAction,
+  getSongLrcAction
 } from '@/store/actions'
 import './style.less'
 
@@ -27,10 +25,6 @@ class Player extends Component {
   componentDidMount() {
     const audio = this.audio.current
     this.setState({ audio })
-  }
-
-  componentWillUnmount() {
-    this.props.cleanPlayDataAction()
   }
 
   // 播放
@@ -80,6 +74,7 @@ class Player extends Component {
     let progress = this.progress.current
     let audio = this.audio.current
     if (!audio.src) return
+
     let left = (event.clientX - progress.offsetLeft) / progress.offsetWidth
     this.audio.current.currentTime = audio.duration * left
   }
@@ -87,7 +82,19 @@ class Player extends Component {
   // 上一曲
   previous = () => {
     const { audio } = this.state
-    this.props.previousAction()
+    const {
+      list,
+      activePlaying,
+      getSongUrlAction,
+      getSongLrcAction
+    } = this.props
+    let activeId = activePlaying.id
+    let activeIndex = list.findIndex(ele => ele.id === activeId)
+    let previousIndex = activeIndex === 0 ? list.length - 1 : activeIndex - 1
+    let previousId = list[previousIndex].id
+
+    getSongUrlAction({ id: previousId })
+    getSongLrcAction({ id: previousId })
     let progressStyle = { width: 0 + '%' }
     this.setState(
       {
@@ -104,7 +111,18 @@ class Player extends Component {
   // 下一曲
   next = () => {
     const { audio } = this.state
-    this.props.nextAction()
+    const {
+      list,
+      activePlaying,
+      getSongUrlAction,
+      getSongLrcAction
+    } = this.props
+    let activeId = activePlaying.id
+    let activeIndex = list.findIndex(ele => ele.id === activeId)
+    let nextIndex = activeIndex === list.length - 1 ? 0 : activeIndex + 1
+    let nextId = list[nextIndex].id
+    getSongUrlAction({ id: nextId })
+    getSongLrcAction({ id: nextId })
     let progressStyle = { width: 0 + '%' }
     this.setState(
       {
@@ -120,7 +138,7 @@ class Player extends Component {
 
   render() {
     const { isPlay, progressStyle, duration, currentTime } = this.state
-    const { activePlaying, isRandom } = this.props
+    const { activePlaying } = this.props
     return (
       <div className="audio-component">
         <div className="audio-box">
@@ -138,12 +156,8 @@ class Player extends Component {
             <div className="play" onClick={this.next}>
               <span className="iconfont icon-next"></span>
             </div>
-            <div className="play" onClick={this.props.playRandomAction}>
-              {isRandom ? (
-                <span className="iconfont icon-suiji"></span>
-              ) : (
-                <span className="iconfont icon-xunhuan"></span>
-              )}
+            <div className="play">
+              <span className="iconfont icon-list"></span>
             </div>
           </div>
 
@@ -193,14 +207,12 @@ class Player extends Component {
 const mapState = state => {
   return {
     activePlaying: state.player.activePlaying,
-    isRandom: state.player.isRandom
+    list: state.player.list
   }
 }
 
 export default connect(mapState, {
-  nextAction,
-  previousAction,
-  playRandomAction,
   songPresentAction,
-  cleanPlayDataAction
+  getSongUrlAction,
+  getSongLrcAction
 })(Player)

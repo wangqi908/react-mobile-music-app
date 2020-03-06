@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { sliceStr } from '@/utils'
 import './style.less'
+import { addSongAction } from '@/store/actions'
 
 class SongItem extends Component {
-  handleSongClick = id => {
-    this.props.history.push(`/detail/${id}`)
+  handleSongClick = item => {
+    this.props.history.push(`/detail/${item.id}`)
+    this.props.addSongAction(item)
   }
 
   addList = item => {
-    console.log(item)
+    this.props.addSongAction(item)
   }
 
   render() {
@@ -19,7 +22,7 @@ class SongItem extends Component {
       <div className="song-item">
         <div
           className="song-item-left"
-          onClick={() => this.handleSongClick(id)}
+          onClick={() => this.handleSongClick({ id, name })}
         >
           <div className="song-index">{index + 1}</div>
           <div className="song-content">
@@ -38,4 +41,5 @@ class SongItem extends Component {
   }
 }
 
-export default withRouter(SongItem)
+const mapState = state => ({})
+export default withRouter(connect(mapState, { addSongAction })(SongItem))
