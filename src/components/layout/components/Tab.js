@@ -5,8 +5,12 @@ export default class Tab extends Component {
   render() {
     return (
       <div>
-        <NavLink to="/" activeClassName='tab-on'>首页</NavLink>
-        <NavLink to="/hot" activeClassName='tab-on'>热门</NavLink>
+        <NavLink to="/" activeClassName="tab-on">
+          首页
+        </NavLink>
+        <NavLink to="/newsong" activeClassName="tab-on">
+          新歌
+        </NavLink>
       </div>
     )
   }

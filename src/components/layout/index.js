@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
-import { Index, Hot } from "@/views";
-import { Tab } from "./components";
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { Index, NewSong } from '@/views'
+import { Tab } from './components'
 
 export default class Layout extends Component {
   render() {
@@ -11,10 +11,10 @@ export default class Layout extends Component {
         <div className="body">
           <Switch>
             <Route path="/" exact component={Index} />
-            <Route path="/hot" component={Hot} />
+            <Route path="/newsong" component={NewSong} />
           </Switch>
         </div>
       </div>
-    );
+    )
   }
 }

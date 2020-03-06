@@ -9,17 +9,18 @@ class SongItem extends Component {
   }
 
   render() {
-    const { ar, name, index, id } = this.props
+    const { artists, ar, name, index, id } = this.props
+    const artistsArr = ar || artists
     return (
       <div className="song-item">
         <div
           className="song-item-left"
           onClick={() => this.handleSongClick(id)}
         >
-          <div className="song-index">{index}</div>
+          <div className="song-index">{index + 1}</div>
           <div className="song-content">
             <div className="song-title">{name}</div>
-            <div className="song-singer">{sliceStr(ar, 'name')}</div>
+            <div className="song-singer">{sliceStr(artistsArr, 'name')}</div>
           </div>
         </div>
         <div className="song-item-right">

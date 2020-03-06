@@ -1,6 +1,7 @@
 import {
   GET_BANNER,
   GET_PERSONALIZED,
+  GET_PERSONALIZED_NEW_SONG,
   GET_PLAYLIST_DETAIL,
   GET_SONG_URL,
   NEXT,
@@ -15,6 +16,7 @@ import {
 import {
   bannerReq,
   personalizedReq,
+  personalizedNewSongReq,
   playlistDetailReq,
   songUrlReq,
   songDetailReq,
@@ -39,6 +41,18 @@ export const getPersonalizedAction = payload => dispatch => {
     if (res.data.code === 200) {
       return dispatch({
         type: GET_PERSONALIZED,
+        payload: res.data.result
+      })
+    }
+  })
+}
+
+// 获取推荐新音乐
+export const getPersonalizedNewSongAction = payload => dispatch => {
+  personalizedNewSongReq(payload).then(res => {
+    if (res.data.code === 200) {
+      return dispatch({
+        type: GET_PERSONALIZED_NEW_SONG,
         payload: res.data.result
       })
     }
