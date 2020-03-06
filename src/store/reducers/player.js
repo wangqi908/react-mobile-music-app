@@ -2,13 +2,19 @@ import {
   GET_SONG_URL,
   NEXT,
   PREVIOUS,
-  GET_RANDOM
+  GET_RANDOM,
+  GET_CURRENT_TIME,
+  GET_DURATION,
+  GET_SONG_PRESENT
 } from '@/store/actions/actionTypes'
 
 const initState = {
   list: [],
   activePlaying: {},
-  isRandom: false
+  isRandom: false,
+  duration: 0,
+  currentTime: 0,
+  songPresent: 0
 }
 
 export default (state = initState, action) => {
@@ -47,6 +53,15 @@ export default (state = initState, action) => {
 
     case GET_RANDOM:
       return { ...state, isRandom: !state.isRandom }
+
+    case GET_CURRENT_TIME:
+      return { ...state, duration: action.payload }
+
+    case GET_DURATION:
+      return { ...state, currentTime: action.payload }
+
+    case GET_SONG_PRESENT:
+      return { ...state, songPresent: action.payload }
 
     default:
       return state

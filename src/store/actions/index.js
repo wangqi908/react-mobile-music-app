@@ -5,7 +5,10 @@ import {
   GET_SONG_URL,
   NEXT,
   PREVIOUS,
-  GET_RANDOM
+  GET_RANDOM,
+  GET_CURRENT_TIME,
+  GET_DURATION,
+  GET_SONG_PRESENT
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
@@ -102,6 +105,30 @@ export const previousAction = payload => {
 export const playRandomAction = payload => {
   return {
     type: GET_RANDOM,
+    payload
+  }
+}
+
+// 音乐当前时间
+export const songCurrentTimeAction = payload => {
+  return {
+    type: GET_CURRENT_TIME,
+    payload
+  }
+}
+
+// 音乐总时长
+export const songDurationAction = payload => {
+  return {
+    type: GET_DURATION,
+    payload
+  }
+}
+
+// 音乐播放时间百分比
+export const songPresentAction = payload => {
+  return {
+    type: GET_SONG_PRESENT,
     payload
   }
 }
