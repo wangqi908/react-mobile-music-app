@@ -92,18 +92,15 @@ class Player extends Component {
     let activeIndex = list.findIndex(ele => ele.id === activeId)
     let previousIndex = activeIndex === 0 ? list.length - 1 : activeIndex - 1
     let previousId = list[previousIndex].id
-
     getSongUrlAction({ id: previousId })
     getSongLrcAction({ id: previousId })
     let progressStyle = { width: 0 + '%' }
     this.setState(
       {
-        progressStyle,
-        isPlay: true
+        progressStyle
       },
       () => {
         audio.currentTime = 0
-        audio.play()
       }
     )
   }
@@ -126,12 +123,10 @@ class Player extends Component {
     let progressStyle = { width: 0 + '%' }
     this.setState(
       {
-        progressStyle,
-        isPlay: true
+        progressStyle
       },
       () => {
         audio.currentTime = 0
-        audio.play()
       }
     )
   }
@@ -196,6 +191,7 @@ class Player extends Component {
           src={activePlaying.url}
           ref={this.audio}
           controls
+          autoPlay
           onTimeUpdate={this.getCurrentTime}
           onCanPlay={this.getAllTime}
         ></audio>
