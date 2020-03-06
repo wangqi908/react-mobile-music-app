@@ -26,7 +26,7 @@ import {
 } from '@/api'
 
 // 获取banner
-export const getBannerAction = payload => dispatch => {
+export const getBannerAction = _ => dispatch => {
   bannerReq().then(res => {
     if (res.data.code === 200) {
       return dispatch({
@@ -38,8 +38,8 @@ export const getBannerAction = payload => dispatch => {
 }
 
 // 搜索
-export const searchAction = payload => dispatch => {
-  searchReq(payload).then(res => {
+export const searchAction = params => dispatch => {
+  searchReq(params).then(res => {
     if (res.data.code === 200) {
       return dispatch({
         type: GET_SEARCH,
@@ -50,8 +50,8 @@ export const searchAction = payload => dispatch => {
 }
 
 // 获取推荐歌单
-export const getPersonalizedAction = payload => dispatch => {
-  personalizedReq(payload).then(res => {
+export const getPersonalizedAction = params => dispatch => {
+  personalizedReq(params).then(res => {
     if (res.data.code === 200) {
       return dispatch({
         type: GET_PERSONALIZED,
@@ -62,8 +62,8 @@ export const getPersonalizedAction = payload => dispatch => {
 }
 
 // 获取推荐新音乐
-export const getPersonalizedNewSongAction = payload => dispatch => {
-  personalizedNewSongReq(payload).then(res => {
+export const getPersonalizedNewSongAction = params => dispatch => {
+  personalizedNewSongReq(params).then(res => {
     if (res.data.code === 200) {
       return dispatch({
         type: GET_PERSONALIZED_NEW_SONG,
@@ -74,8 +74,8 @@ export const getPersonalizedNewSongAction = payload => dispatch => {
 }
 
 // 获取歌单详情
-export const getPlaylistDetailAction = payload => dispatch => {
-  playlistDetailReq(payload).then(res => {
+export const getPlaylistDetailAction = params => dispatch => {
+  playlistDetailReq(params).then(res => {
     if (res.data.code === 200) {
       return dispatch({
         type: GET_PLAYLIST_DETAIL,
@@ -85,34 +85,32 @@ export const getPlaylistDetailAction = payload => dispatch => {
   })
 }
 
-// 获取歌曲url
-export const getSongUrlAction = payload => async dispatch => {
-  // songUrlReq(payload).then(res => {
-  //   if (res.data.code === 200) {
-  //     return dispatch({
-  //       type: GET_SONG_URL,
-  //       payload: res.data.data
-  //     })
-  //   }
-  // })
-  const songUrRes = await songUrlReq(payload)
-  const songDetailRes = await songDetailReq({ ids: payload.id })
-  const songLyricRes = await songLyricReq(payload)
+// 获取歌曲歌词
+export const getSongLrcAction = params => dispatch => {
+  songLyricReq(params).then(res => {
+    if (res.data.code === 200) {
+      let payload = res.data.lrc ? res.data.lrc.lyric : ''
+      return dispatch({
+        type: GET_SONG_LYRIC,
+        payload
+      })
+    }
+  })
+}
 
-  if (
-    songUrRes.data.code === 200 &&
-    songDetailRes.data.code === 200 &&
-    songLyricRes.data.code === 200
-  ) {
+// 获取歌曲url
+export const getSongUrlAction = params => async dispatch => {
+  const songUrRes = await songUrlReq(params)
+  const songDetailRes = await songDetailReq({ ids: params.id })
+
+  if (songUrRes.data.code === 200 && songDetailRes.data.code === 200) {
     let urlData = songUrRes.data.data
     let detailData = songDetailRes.data.songs
 
-    let lyricData = songLyricRes.data.lrc ? songLyricRes.data.lrc.lyric : ''
     let songList = []
     urlData.forEach(ele => {
       detailData.forEach(item => {
         if (ele.id === item.id) {
-          item.lrc = lyricData
           songList.push(Object.assign({}, ele, item))
         }
       })

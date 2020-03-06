@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { cutLrc } from '@/utils'
+import { getSongLrcAction } from '@/store/actions'
 
 class Lyric extends Component {
-  render() {
-    const { activePlaying } = this.props
-    const lyricArr = cutLrc(activePlaying.lrc) || []
+  componentDidMount() {
+    const { id } = this.props.match.params
+    this.props.getSongLrcAction({ id })
+  }
 
+  render() {
+    const { lyric } = this.props
+    const lyricArr = cutLrc(lyric) || []
     return (
       <div className="lyric-box">
         {lyricArr.length !== 0 ? (
@@ -27,8 +33,8 @@ class Lyric extends Component {
 
 const mapState = state => {
   return {
-    activePlaying: state.player.activePlaying
+    lyric: state.player.lyric
   }
 }
 
-export default connect(mapState)(Lyric)
+export default withRouter(connect(mapState, { getSongLrcAction })(Lyric))

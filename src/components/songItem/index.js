@@ -8,6 +8,10 @@ class SongItem extends Component {
     this.props.history.push(`/detail/${id}`)
   }
 
+  addList = item => {
+    console.log(item)
+  }
+
   render() {
     const { artists, ar, name, index, id } = this.props
     const artistsArr = ar || artists
@@ -23,7 +27,10 @@ class SongItem extends Component {
             <div className="song-singer">{sliceStr(artistsArr, 'name')}</div>
           </div>
         </div>
-        <div className="song-item-right">
+        <div
+          className="song-item-right"
+          onClick={() => this.addList({ id, name })}
+        >
           <span className="iconfont icon-jia"></span>
         </div>
       </div>
