@@ -6,6 +6,7 @@ import {
   getSongUrlAction,
   getSongLrcAction
 } from '@/store/actions'
+import CollectionList from './CollectionList'
 import './style.less'
 
 class Player extends Component {
@@ -152,7 +153,8 @@ class Player extends Component {
               <span className="iconfont icon-next"></span>
             </div>
             <div className="play">
-              <span className="iconfont icon-list"></span>
+              {/* <span className="iconfont icon-list"></span> */}
+              <CollectionList />
             </div>
           </div>
 

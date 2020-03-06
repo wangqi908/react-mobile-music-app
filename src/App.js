@@ -3,7 +3,7 @@ import { Layout } from '@/components'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import store from './store'
-import { Detail, Playlist } from '@/views'
+import { Detail, Playlist, Test } from '@/views'
 
 export default class App extends Component {
   render() {
@@ -11,6 +11,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
+            <Route path="/Test" exact component={Test} />
             <Route path="/detail/:id" exact component={Detail} />
             <Route path="/playlist/:id" exact component={Playlist} />
             <Layout />
