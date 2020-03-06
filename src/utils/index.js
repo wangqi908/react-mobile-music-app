@@ -96,6 +96,7 @@ export const sliceStr = (arr, key) => {
 }
 
 export const cutLrc = lrc => {
+  if (lrc === '') return
   const reg = new RegExp(/\[[^\]]*\]/, 'g')
   const lrcArr = []
   lrc.split('\n').forEach(ele => {

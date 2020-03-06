@@ -1,15 +1,25 @@
 .song-detail {
+  min-height: 100%;
   padding-bottom: 150px;
-  border: 1px solid rgb(218, 37, 37);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(119, 238, 198, 0.712),
+    rgba(103, 156, 231, 0.76),
+    rgb(238, 111, 238)
+  );
   .player-box {
     position: fixed;
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
   }
-  .lyric-line{
-    border: 1px solid #000;
-    padding: 10px;
-    margin: 15px 0;
+  .lyric-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .lyric-line {
+    padding: 14px 0;
   }
 }

@@ -5,7 +5,8 @@ import {
   GET_RANDOM,
   GET_CURRENT_TIME,
   GET_DURATION,
-  GET_SONG_PRESENT
+  GET_SONG_PRESENT,
+  GET_SONG_LYRIC
 } from '@/store/actions/actionTypes'
 
 const initState = {
@@ -14,7 +15,8 @@ const initState = {
   isRandom: false,
   duration: 0,
   currentTime: 0,
-  songPresent: 0
+  songPresent: 0,
+  lyric: ''
 }
 
 export default (state = initState, action) => {
@@ -62,6 +64,9 @@ export default (state = initState, action) => {
 
     case GET_SONG_PRESENT:
       return { ...state, songPresent: action.payload }
+
+    case GET_SONG_LYRIC:
+      return { ...state, lyric: action.payload }
 
     default:
       return state

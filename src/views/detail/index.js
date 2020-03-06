@@ -11,9 +11,10 @@ class Detail extends Component {
     this.props.getSongUrlAction({ id })
   }
   render() {
+    const { activePlaying } = this.props
     return (
       <div className="song-detail">
-        <Lyric />
+        {activePlaying.id ? <Lyric /> : null}
         <div className="player-box">
           <Player />
         </div>
@@ -24,7 +25,7 @@ class Detail extends Component {
 
 const mapState = state => {
   return {
-    list: state.player.list
+    activePlaying: state.player.activePlaying
   }
 }
 

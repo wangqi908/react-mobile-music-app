@@ -8,14 +8,16 @@ import {
   GET_RANDOM,
   GET_CURRENT_TIME,
   GET_DURATION,
-  GET_SONG_PRESENT
+  GET_SONG_PRESENT,
+  GET_SONG_LYRIC
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
   personalizedReq,
   playlistDetailReq,
   songUrlReq,
-  songDetailReq
+  songDetailReq,
+  songLyricReq
 } from '@/api'
 
 // 获取banner
@@ -54,6 +56,18 @@ export const getPlaylistDetailAction = payload => dispatch => {
   })
 }
 
+// 获取歌词
+export const getSongLyricAction = payload => dispatch => {
+  songLyricReq(payload).then(res => {
+    if (res.data.code === 200) {
+      return dispatch({
+        type: GET_SONG_LYRIC,
+        payload: res.data.lrc.lyric
+      })
+    }
+  })
+}
+
 // 获取歌曲url
 export const getSongUrlAction = payload => async dispatch => {
   // songUrlReq(payload).then(res => {
@@ -66,14 +80,21 @@ export const getSongUrlAction = payload => async dispatch => {
   // })
   const songUrRes = await songUrlReq(payload)
   const songDetailRes = await songDetailReq({ ids: payload.id })
+  const songLyricRes = await songLyricReq(payload)
 
-  if (songUrRes.data.code === 200 && songDetailRes.data.code === 200) {
+  if (
+    songUrRes.data.code === 200 &&
+    songDetailRes.data.code === 200 &&
+    songLyricRes.data.code === 200
+  ) {
     let urlData = songUrRes.data.data
     let detailData = songDetailRes.data.songs
+    let lyricData = songLyricRes.data.lrc.lyric
     let songList = []
     urlData.forEach(ele => {
       detailData.forEach(item => {
         if (ele.id === item.id) {
+          item.lrc = lyricData
           songList.push(Object.assign({}, ele, item))
         }
       })
