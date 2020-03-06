@@ -94,3 +94,22 @@ export const sliceStr = (arr, key) => {
   })
   return str.slice(0, -1)
 }
+
+export const cutLrc = lrc => {
+  const reg = new RegExp(/\[[^\]]*\]/, 'g')
+  const lrcArr = []
+  lrc.split('\n').forEach(ele => {
+    const times = ele.match(reg) || []
+    if (times.length > 0) {
+      const handleTime = times[0].slice(1, -1).split(':')
+      const lrc = ele.replace(times.join(''), '').trim()
+      if (lrc) {
+        lrcArr.push({
+          time: Math.floor(handleTime[0] * 60) + Math.floor(handleTime[1]),
+          lrc: ele.replace(times.join(''), '').trim()
+        })
+      }
+    }
+  })
+  return lrcArr
+}
