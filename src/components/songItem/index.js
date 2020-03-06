@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { sliceStr } from '@/utils'
 import './style.less'
 
-class Item extends Component {
+class SongItem extends Component {
   handleSongClick = id => {
     this.props.history.push(`/detail/${id}`)
   }
@@ -30,4 +30,4 @@ class Item extends Component {
   }
 }
 
-export default withRouter(Item)
+export default withRouter(SongItem)

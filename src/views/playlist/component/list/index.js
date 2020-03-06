@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Item from './Item'
+import { SongItem } from '@/components'
 import './style.less'
 
 export default class List extends Component {
@@ -9,7 +9,7 @@ export default class List extends Component {
     return (
       <div>
         {list.map((item, index) => {
-          return <Item key={item.id} {...item} index={index} />
+          return <SongItem key={item.id} {...item} index={index} />
         })}
       </div>
     )

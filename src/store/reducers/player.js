@@ -6,7 +6,8 @@ import {
   GET_CURRENT_TIME,
   GET_DURATION,
   GET_SONG_PRESENT,
-  GET_SONG_LYRIC
+  GET_SONG_LYRIC,
+  CLEAN_PLAY_DATA
 } from '@/store/actions/actionTypes'
 
 const initState = {
@@ -67,6 +68,17 @@ export default (state = initState, action) => {
 
     case GET_SONG_LYRIC:
       return { ...state, lyric: action.payload }
+
+    case CLEAN_PLAY_DATA:
+      return {
+        list: [],
+        activePlaying: {},
+        isRandom: false,
+        duration: 0,
+        currentTime: 0,
+        songPresent: 0,
+        lyric: ''
+      }
 
     default:
       return state

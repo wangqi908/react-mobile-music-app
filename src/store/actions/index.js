@@ -9,7 +9,8 @@ import {
   GET_CURRENT_TIME,
   GET_DURATION,
   GET_SONG_PRESENT,
-  GET_SONG_LYRIC
+  GET_SONG_LYRIC,
+  CLEAN_PLAY_DATA
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
@@ -150,6 +151,14 @@ export const songDurationAction = payload => {
 export const songPresentAction = payload => {
   return {
     type: GET_SONG_PRESENT,
+    payload
+  }
+}
+
+// 清除player数据
+export const cleanPlayDataAction = payload => {
+  return {
+    type: CLEAN_PLAY_DATA,
     payload
   }
 }

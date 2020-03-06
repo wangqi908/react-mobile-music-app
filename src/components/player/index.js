@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { formatSecond } from '@/utils'
 import { connect } from 'react-redux'
-import { nextAction, previousAction, playRandomAction, songCurrentTimeAction, songDurationAction, songPresentAction } from '@/store/actions'
+import {
+  nextAction,
+  previousAction,
+  playRandomAction,
+  songPresentAction,
+  cleanPlayDataAction
+} from '@/store/actions'
 import './style.less'
 
 class Player extends Component {
@@ -23,6 +29,10 @@ class Player extends Component {
     this.setState({ audio })
   }
 
+  componentWillUnmount() {
+    this.props.cleanPlayDataAction()
+  }
+
   // 播放
   play = () => {
     const { isPlay, audio, currentTime, duration } = this.state
@@ -39,7 +49,7 @@ class Player extends Component {
   // 监听播放
   getCurrentTime = () => {
     const { currentTime, duration } = this.state.audio
-    const { songCurrentTimeAction, songDurationAction, songPresentAction } = this.props
+    const { songPresentAction } = this.props
     let percent = ((currentTime / duration) * 100).toFixed(2) * 1
     let progressStyle = { width: percent + '%' }
     this.setState({
@@ -52,16 +62,16 @@ class Player extends Component {
         isPlay: false
       })
     }
-    songCurrentTimeAction(currentTime)
-    songDurationAction(duration)
+
     songPresentAction(percent)
   }
 
   // 获取总时长
   getAllTime = () => {
     const audio = this.state.audio
+    const duration = audio.src ? audio.duration : 0
     this.setState({
-      duration: audio.duration
+      duration
     })
   }
 
@@ -69,6 +79,7 @@ class Player extends Component {
   clickProgress = event => {
     let progress = this.progress.current
     let audio = this.audio.current
+    if (!audio.src) return
     let left = (event.clientX - progress.offsetLeft) / progress.offsetWidth
     this.audio.current.currentTime = audio.duration * left
   }
@@ -121,8 +132,8 @@ class Player extends Component {
               {isPlay ? (
                 <span className="iconfont icon-zanting"></span>
               ) : (
-                  <span className="iconfont icon-bofang"></span>
-                )}
+                <span className="iconfont icon-bofang"></span>
+              )}
             </div>
             <div className="play" onClick={this.next}>
               <span className="iconfont icon-next"></span>
@@ -131,8 +142,8 @@ class Player extends Component {
               {isRandom ? (
                 <span className="iconfont icon-suiji"></span>
               ) : (
-                  <span className="iconfont icon-xunhuan"></span>
-                )}
+                <span className="iconfont icon-xunhuan"></span>
+              )}
             </div>
           </div>
 
@@ -190,7 +201,6 @@ export default connect(mapState, {
   nextAction,
   previousAction,
   playRandomAction,
-  songCurrentTimeAction,
-  songDurationAction,
-  songPresentAction
+  songPresentAction,
+  cleanPlayDataAction
 })(Player)
