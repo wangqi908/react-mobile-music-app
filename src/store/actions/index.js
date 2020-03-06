@@ -1,5 +1,6 @@
 import {
   GET_BANNER,
+  GET_SEARCH,
   GET_PERSONALIZED,
   GET_PERSONALIZED_NEW_SONG,
   GET_PLAYLIST_DETAIL,
@@ -15,6 +16,7 @@ import {
 } from '@/store/actions/actionTypes'
 import {
   bannerReq,
+  searchReq,
   personalizedReq,
   personalizedNewSongReq,
   playlistDetailReq,
@@ -30,6 +32,18 @@ export const getBannerAction = payload => dispatch => {
       return dispatch({
         type: GET_BANNER,
         payload: res.data.banners
+      })
+    }
+  })
+}
+
+// 搜索
+export const searchAction = payload => dispatch => {
+  searchReq(payload).then(res => {
+    if (res.data.code === 200) {
+      return dispatch({
+        type: GET_SEARCH,
+        payload: res.data.result.songs
       })
     }
   })
@@ -71,18 +85,6 @@ export const getPlaylistDetailAction = payload => dispatch => {
   })
 }
 
-// 获取歌词
-export const getSongLyricAction = payload => dispatch => {
-  songLyricReq(payload).then(res => {
-    if (res.data.code === 200) {
-      return dispatch({
-        type: GET_SONG_LYRIC,
-        payload: res.data.lrc.lyric
-      })
-    }
-  })
-}
-
 // 获取歌曲url
 export const getSongUrlAction = payload => async dispatch => {
   // songUrlReq(payload).then(res => {
@@ -104,7 +106,8 @@ export const getSongUrlAction = payload => async dispatch => {
   ) {
     let urlData = songUrRes.data.data
     let detailData = songDetailRes.data.songs
-    let lyricData = songLyricRes.data.lrc.lyric
+
+    let lyricData = songLyricRes.data.lrc ? songLyricRes.data.lrc.lyric : ''
     let songList = []
     urlData.forEach(ele => {
       detailData.forEach(item => {

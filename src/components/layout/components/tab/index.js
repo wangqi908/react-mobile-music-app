@@ -12,6 +12,9 @@ export default class Tab extends Component {
         <NavLink to="/newsong" activeClassName="tab-on">
           新歌
         </NavLink>
+        <NavLink to="/search" activeClassName="tab-on">
+          搜索
+        </NavLink>
       </div>
     )
   }

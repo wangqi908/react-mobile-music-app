@@ -1,6 +1,7 @@
 import req from './http.js'
 
-export const bannerReq = params => req('/banner') //banner
+export const bannerReq = _ => req('/banner') //banner
+export const searchReq = keywords => req('/search', keywords) //搜索关键词
 export const personalizedReq = params => req('/personalized', params) //推荐歌单
 export const personalizedNewSongReq = params =>
   req('/personalized/newsong', params) //推荐新音乐
