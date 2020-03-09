@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { SheetBox } from '@/components'
+import { getSongUrlAction, getSongLrcAction } from '@/store/actions'
 import './style.less'
 
 class CollectionList extends Component {
@@ -10,7 +11,7 @@ class CollectionList extends Component {
     timeout: 1000
   }
 
-  openSheet = value => {
+  openSheet = () => {
     this.setState({ isShow: !this.state.isShow })
   }
 
@@ -20,10 +21,12 @@ class CollectionList extends Component {
 
   handleSongClick = item => {
     this.props.history.push(`/detail/${item.id}`)
+    // this.props.getSongUrlAction({ id: item.id })
+    // this.props.getSongLrcAction({ id: item.id })
   }
 
   render() {
-    const { list } = this.props
+    const { list, activePlaying } = this.props
     return (
       <div className="collection-list">
         <span className="iconfont icon-list" onClick={this.openSheet}></span>
@@ -31,7 +34,9 @@ class CollectionList extends Component {
           {list.map(item => {
             return (
               <div
-                className="sheet-song-item"
+                className={`sheet-song-item ${
+                  activePlaying.id === item.id ? 'active-play' : ''
+                }`}
                 key={item.id}
                 onClick={() => this.handleSongClick(item)}
               >
@@ -47,8 +52,11 @@ class CollectionList extends Component {
 
 const mapState = state => {
   return {
-    list: state.player.list
+    list: state.player.list,
+    activePlaying: state.player.activePlaying
   }
 }
 
-export default withRouter(connect(mapState)(CollectionList))
+export default withRouter(
+  connect(mapState, { getSongUrlAction, getSongLrcAction })(CollectionList)
+)

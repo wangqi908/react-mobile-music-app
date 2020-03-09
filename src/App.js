@@ -15,7 +15,7 @@ class App extends Component {
           <CSSTransition
             key={location.key}
             classNames="fade"
-            timeout={600}
+            timeout={200}
             appear={true}
             unmountOnExit
           >
