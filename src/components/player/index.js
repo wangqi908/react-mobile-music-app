@@ -25,7 +25,8 @@ class Player extends Component {
 
   componentDidMount() {
     const audio = this.audio.current
-    this.setState({ audio })
+    const { isPlay } = this.state
+    this.setState({ audio, isPlay: !isPlay })
   }
 
   // 播放
