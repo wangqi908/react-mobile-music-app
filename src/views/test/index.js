@@ -7,14 +7,19 @@ export default class Test extends Component {
     timeout: 1000
   }
 
-  openSheet = () => {
+  openSheet = value => {
     this.setState({ isShow: !this.state.isShow })
   }
+
+  getShowState = isShow => {
+    this.setState({ isShow })
+  }
+
   render() {
     return (
       <div>
         <span className="iconfont icon-list" onClick={this.openSheet}></span>
-        <SheetBox {...this.state}>
+        <SheetBox {...this.state} openSheet={this.getShowState}>
           <p>Sheet</p>
           <p>Sheet</p>
           <p>Sheet</p>
