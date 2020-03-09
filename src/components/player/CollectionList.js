@@ -1,28 +1,45 @@
 import React, { Component } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { SheetBox } from '@/components'
 import './style.less'
 
 class CollectionList extends Component {
-  state = { show: true }
+  state = {
+    isShow: false,
+    timeout: 1000
+  }
 
-  openSheet = () => {
-    this.setState({ show: !this.state.show })
+  openSheet = value => {
+    this.setState({ isShow: !this.state.isShow })
+  }
+
+  getShowState = isShow => {
+    this.setState({ isShow })
+  }
+
+  handleSongClick = item => {
+    this.props.history.push(`/detail/${item.id}`)
   }
 
   render() {
-    const { show } = this.state
+    const { list } = this.props
     return (
-      <div>
+      <div className="collection-list">
         <span className="iconfont icon-list" onClick={this.openSheet}></span>
-        <CSSTransition
-          in={show}
-          timeout={500}
-          classNames={'fade'}
-          unmountOnExit={true}
-        >
-          <div className="sheet-box">sheet-box</div>
-        </CSSTransition>
+        <SheetBox {...this.state} openSheet={this.getShowState}>
+          {list.map(item => {
+            return (
+              <div
+                className="sheet-song-item"
+                key={item.id}
+                onClick={() => this.handleSongClick(item)}
+              >
+                {item.name}
+              </div>
+            )
+          })}
+        </SheetBox>
       </div>
     )
   }
@@ -34,4 +51,4 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(CollectionList)
+export default withRouter(connect(mapState)(CollectionList))

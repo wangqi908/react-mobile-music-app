@@ -42,7 +42,10 @@ export default (state = initState, action) => {
       return { ...state, lyric: action.payload }
 
     case ADD_SONG:
-      return { ...state, list: [...state.list, action.payload] }
+      return {
+        ...state,
+        list: duplicateRemoval([...state.list, action.payload])
+      }
 
     case CLEAN_PLAY_DATA:
       return {
