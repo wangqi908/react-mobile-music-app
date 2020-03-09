@@ -1,0 +1,37 @@
+.sheet-box {
+  overflow: hidden;
+
+  .sheet-content-box {
+    height: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(241, 241, 241, 0.5);
+    position: fixed;
+    bottom: 0;
+    overflow: auto;
+  }
+
+  //入场动画
+  .myfade-enter {
+    height: 0;
+  }
+  .myfade-enter-active {
+    height: 200px;
+    transition: height 0.6s;
+  }
+  .myfade-enter-done {
+    height: 200px;
+  }
+
+  //出场动画
+  .myfade-exit {
+    height: 200px;
+  }
+  .myfade-exit-active {
+    height: 0;
+    transition: height 0.6s;
+  }
+  .myfade-exit-done {
+    height: 0;
+  }
+}

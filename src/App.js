@@ -17,7 +17,7 @@ class App extends Component {
             classNames="fade"
             timeout={600}
             appear={true}
-            unmountOnExit={true}
+            unmountOnExit
           >
             <Switch>
               <Route path="/Test" exact component={Test} />

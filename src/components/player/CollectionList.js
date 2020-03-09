@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
+import './style.less'
 
 class CollectionList extends Component {
+  state = { show: true }
+
   openSheet = () => {
-    console.log(this.props.list)
+    this.setState({ show: !this.state.show })
   }
 
   render() {
-    return <span className="iconfont icon-list" onClick={this.openSheet}></span>
+    const { show } = this.state
+    return (
+      <div>
+        <span className="iconfont icon-list" onClick={this.openSheet}></span>
+        <CSSTransition
+          in={show}
+          timeout={500}
+          classNames={'fade'}
+          unmountOnExit={true}
+        >
+          <div className="sheet-box">sheet-box</div>
+        </CSSTransition>
+      </div>
+    )
   }
 }
 

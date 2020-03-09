@@ -1,20 +1,37 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { SheetBox } from '@/components'
 
-class Test extends Component {
+export default class Test extends Component {
+  state = {
+    isShow: false,
+    timeout: 1000
+  }
+
   openSheet = () => {
-    console.log(this.props.list)
+    this.setState({ isShow: !this.state.isShow })
   }
-
   render() {
-    return <span className="iconfont icon-list" onClick={this.openSheet}></span>
+    return (
+      <div>
+        <span className="iconfont icon-list" onClick={this.openSheet}></span>
+        <SheetBox {...this.state}>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+          <p>Sheet</p>
+        </SheetBox>
+      </div>
+    )
   }
 }
-
-const mapState = state => {
-  return {
-    list: state.player.list
-  }
-}
-
-export default connect(mapState)(Test)
