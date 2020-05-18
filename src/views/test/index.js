@@ -1,41 +1,29 @@
 import React, { Component } from 'react'
-import { SheetBox } from '@/components'
+import Modal from './modal'
 
 export default class Test extends Component {
   state = {
-    isShow: false,
-    timeout: 1000
+    visible: false
   }
 
-  openSheet = value => {
-    this.setState({ isShow: !this.state.isShow })
+  showModal = () => {
+    this.setState({ visible: true })
   }
 
-  getShowState = isShow => {
-    this.setState({ isShow })
+  getState = () => {
+    console.log(this.state)
   }
 
   render() {
+    const { visible } = this.state
+
     return (
-      <div>
-        <span className="iconfont icon-list" onClick={this.openSheet}></span>
-        <SheetBox {...this.state} openSheet={this.getShowState}>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-          <p>Sheet</p>
-        </SheetBox>
+      <div className="app">
+        <button onClick={this.showModal}>click here</button>
+        <button onClick={this.getState}>state</button>
+        <Modal visible={visible} title="这是自定义title">
+          children
+        </Modal>
       </div>
     )
   }

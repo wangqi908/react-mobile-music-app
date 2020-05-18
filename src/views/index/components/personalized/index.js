@@ -6,6 +6,7 @@ import './style.less'
 
 class Personalized extends Component {
   componentDidMount() {
+    console.log(1)
     const { list } = this.props
     if (list.length === 0) this.props.getPersonalizedAction({ limit: 9 })
   }
@@ -16,11 +17,7 @@ class Personalized extends Component {
       <div className="personalized-box">
         {list.map(item => {
           return (
-            <NavLink
-              className="item-box"
-              to={`/playlist/${item.id}`}
-              key={item.id}
-            >
+            <NavLink className="item-box" to={`/playlist/${item.id}`} key={item.id}>
               <div className="item-cover">
                 <img src={item.picUrl} alt={item.name} />
               </div>

@@ -3,17 +3,21 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height: 34px;
+  height: 34/16rem;
   background-color: #fff;
   display: flex;
   justify-content: space-around;
+  overflow: hidden;
   align-items: center;
+  .tab-item {
+    padding: 0 20/16rem;
+
+    box-sizing: border-box;
+  }
   .tab-on {
     box-sizing: border-box;
-    height: 34px;
-    width: 40px;
     text-align: center;
-    line-height: 34px;
-    border-bottom: 4px solid #1890ff;
+    line-height: 34/16rem;
+    border-bottom: 4/16rem solid #1890ff;
   }
 }

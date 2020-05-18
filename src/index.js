@@ -18,6 +18,7 @@ import './assets/css/reset.css'
 
 ReactDOM.render(
   <Router>
+    {/* <Router basename="/music"> */}
     <App />
   </Router>,
   document.getElementById('root')

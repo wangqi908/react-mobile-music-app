@@ -21,8 +21,6 @@ class CollectionList extends Component {
 
   handleSongClick = item => {
     this.props.history.push(`/detail/${item.id}`)
-    // this.props.getSongUrlAction({ id: item.id })
-    // this.props.getSongLrcAction({ id: item.id })
   }
 
   render() {
