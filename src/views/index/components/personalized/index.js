@@ -6,7 +6,6 @@ import './style.less'
 
 class Personalized extends Component {
   componentDidMount() {
-    console.log(1)
     const { list } = this.props
     if (list.length === 0) this.props.getPersonalizedAction({ limit: 9 })
   }
